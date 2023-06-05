@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalhes do Produto</title>
+  <style>
+    .product-details {
+  text-align: center;
+}
+
+.product-details img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.product-details h3 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.product-details .price {
+  font-size: 18px;
+  color: green;
+  margin-bottom: 10px;
+}
+
+.product-details .description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.product-details .product-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.product-details .product-btn:hover {
+  background-color: #45a049;
+}
+#regressiva{
+  color: red;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 40px;
+  background-color: #5a795b;
+}
+
+.tela-sobre {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.conteudo-tela-sobre {
+  background-color: #fff;
+  padding: 50px;
+}
+  </style>
+</head>
+<body>
+  <div class="product-details">
+    <img src="calça.jpg">
+    <h3>CALÇA</h3>
+    <p class="price">R$ 99,99</p>
+    <p class="description">Esta calça é feita com um tecido resistente e confortável, ideal para diversas ocasiões. Possui um design moderno e elegante.</p>
+    <button id="addNoCarrinho"  onclick="addNoCarrinho()" class="product-btn">Adicionar ao Carrinho</button>
+    <h3>ULTIMOS DIAS DE PROMOÇÃO</h3>
+    <p id="regressiva"></p>
+
+    <button class="product-btn" onclick="exibirTelaSobre()">COMPRAR</button>
+
+    <div id="telaSobre" class="tela-sobre">
+      <div class="conteudo-tela-sobre">
+        <h4> Numero do cartao: <input type="text"> </h4>
+        <button class="product-btn" onclick= "reexibirtelaSobre()">Finalizar Compra</button>
+      </div>
+    </div>
+
+    <div id="reexibirtelaSobre" class="tela-sobre">
+      <div class="conteudo-tela-sobre">
+        <h3>Obrigado por comprar!</h3>
+        <p>Seu pedido foi realizado com sucesso.</p>
+        <button class="product-btn" onclick="fecharTelaSobre()">Fechar</button>
+      </div>
+    </div>
+
+  </div>
+<script>
+
+const adNoCarrinho = document.getElementById("addNoCarrinho");
+
+function addNoCarrinho(){
+    alert("Adicionado no carrinho");
+} 
+
+
+var dataFinal = new Date("2023-06-07 23:59:59").getTime();
+
+
+var regressiva = setInterval(function() {
+ 
+  var agora = new Date().getTime();
+
+  
+  var restante = dataFinal - agora;
+
+ 
+  var dias = Math.floor(restante  / (1000 * 60 * 60 * 24));
+  var horas = Math.floor((restante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutos = Math.floor((restante  % (1000 * 60 * 60)) / (1000 * 60));
+  var segundos = Math.floor((restante  % (1000 * 60)) / 1000);
+
+ 
+  document.getElementById("regressiva").innerHTML = dias + "dias " + horas + "horas " + minutos + "m " + segundos + "s ";
+
+ 
+  if (restante  < 0) {
+    clearInterval(regressiva);
+    document.getElementById("regressiva").innerHTML = "Contagem regressiva encerrada";
+  }
+}, 1000);
+
+function exibirTelaSobre() {
+  var telaSobre = document.getElementById("telaSobre");
+  telaSobre.style.display = "flex";
+}
+
+function reexibirtelaSobre() {
+  var telaSobre = document.getElementById("reexibirtelaSobre");
+  telaSobre.style.display = "flex";
+}
+
+function fecharTelaSobre() {
+  var telaSobre = document.getElementById("reexibirtelaSobre");
+  telaSobre.style.display = "none";
+}
+
+
+
+</script>
+
+</body>
+</html>
